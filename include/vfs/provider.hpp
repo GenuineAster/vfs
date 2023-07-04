@@ -9,13 +9,15 @@
 #include <vector>
 
 namespace vfs {
-	struct provider_capabilites {
+	struct VFS_EXPORT provider_capabilites {
 		bool supports_writes;
 		bool supports_reads;
 	};
 
-	class provider {
+	class VFS_EXPORT provider {
 	public:
+		virtual ~provider() = default;
+
 		virtual provider_capabilites get_capabilities() = 0;
 		virtual bool file_exists(const path &path) const = 0;
 		virtual bool is_file_writable(const path &path) const = 0;

@@ -73,6 +73,8 @@ add_library(
     include/vfs/path_fwd.hpp
     include/vfs/path.hpp
     source/vfs/path.cpp
+    include/vfs/providers/local_filesystem_provider.hpp
+    source/vfs/providers/local_filesystem_provider.cpp
 )
 add_library(vfs::vfs ALIAS vfs_vfs)
 

@@ -64,6 +64,12 @@ include(cmake/dev-mode.cmake)
 # ---- VFS library ----
 add_library(
     vfs_vfs
+    include/vfs/virtual_file_system_fwd.hpp
+    include/vfs/virtual_file_system.hpp
+    source/vfs/virtual_file_system.cpp
+    include/vfs/provider_fwd.hpp
+    include/vfs/provider.hpp
+    source/vfs/provider.cpp
     include/vfs/path_fwd.hpp
     include/vfs/path.hpp
     source/vfs/path.cpp

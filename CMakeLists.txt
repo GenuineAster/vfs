@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
-set(VFS_VERSION 0.1.0)
+set(VFS_VERSION 0.0.0)
 
 include(cmake/prelude.cmake)
 

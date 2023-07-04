@@ -64,6 +64,7 @@ include(cmake/dev-mode.cmake)
 # ---- VFS library ----
 add_library(
     vfs_vfs
+    include/vfs/file_operation_results.hpp
     include/vfs/virtual_file_system_fwd.hpp
     include/vfs/virtual_file_system.hpp
     source/vfs/virtual_file_system.cpp

@@ -74,47 +74,51 @@ namespace vfs {
 		}
 	}
 
-	bool virtual_file_system::file_exists(const path &path) const {
+	file_exists_result virtual_file_system::file_exists(const path &path) const {
 		if (auto resolved = resolve_mount(path); resolved.mount != nullptr) {
 			return resolved.mount->provider->file_exists(resolved.local_path);
 		} else {
-			return false;
+			return {false, file_exists_status::NO_PROVIDER};
 		}
 	}
 
-	bool virtual_file_system::is_file_writable(const path &path) const {
+	is_file_writable_result virtual_file_system::is_file_writable(const path &path) const {
 		if (auto resolved = resolve_mount(path); resolved.mount != nullptr) {
 			return resolved.mount->provider->is_file_writable(resolved.local_path);
 		} else {
-			return false;
+			return {false, is_file_writable_status::NO_PROVIDER};
 		}
 	}
 
-	bool virtual_file_system::is_file_readable(const path &path) const {
+	is_file_readable_result virtual_file_system::is_file_readable(const path &path) const {
 		if (auto resolved = resolve_mount(path); resolved.mount != nullptr) {
 			return resolved.mount->provider->is_file_readable(resolved.local_path);
 		} else {
-			return false;
+			return {false, is_file_readable_status::NO_PROVIDER};
 		}
 	}
 
-	std::size_t virtual_file_system::get_file_size(const path &path) const {
+	get_file_size_result virtual_file_system::get_file_size(const path &path) const {
 		if (auto resolved = resolve_mount(path); resolved.mount != nullptr) {
 			return resolved.mount->provider->get_file_size(resolved.local_path);
 		} else {
-			return 0;
+			return {0, get_file_size_status::NO_PROVIDER};
 		}
 	}
 
-	void virtual_file_system::read_file_contents(const path &path, std::vector<std::byte> &data) const {
+	read_file_contents_result virtual_file_system::read_file_contents(const path &path, std::vector<std::byte> &data) const {
 		if (auto resolved = resolve_mount(path); resolved.mount != nullptr) {
-			resolved.mount->provider->read_file_contents(resolved.local_path, data);
+			return resolved.mount->provider->read_file_contents(resolved.local_path, data);
+		} else {
+			return {read_file_contents_status::NO_PROVIDER};
 		}
 	}
 
-	void virtual_file_system::write_file_contents(const path &path, const std::vector<std::byte> &data) {
+	write_file_contents_result virtual_file_system::write_file_contents(const path &path, const std::vector<std::byte> &data) {
 		if (auto resolved = resolve_mount(path); resolved.mount != nullptr) {
-			resolved.mount->provider->write_file_contents(resolved.local_path, data);
+			return resolved.mount->provider->write_file_contents(resolved.local_path, data);
+		} else {
+			return {write_file_contents_status::NO_PROVIDER};
 		}
 	}
 

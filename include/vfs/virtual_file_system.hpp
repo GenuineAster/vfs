@@ -6,6 +6,7 @@
 
 #include <vfs/path.hpp>
 #include <vfs/provider_fwd.hpp>
+#include <vfs/file_operation_results.hpp>
 
 #include <cstddef>
 #include <vector>
@@ -29,12 +30,12 @@ namespace vfs {
 		void unmount(mount_handle handle);
 
 		// file operations
-		bool file_exists(const path &path) const;
-		bool is_file_writable(const path &path) const;
-		bool is_file_readable(const path &path) const;
-		std::size_t get_file_size(const path &path) const;
-		void read_file_contents(const path &path, std::vector<std::byte> &data) const;
-		void write_file_contents(const path &path, const std::vector<std::byte> &data);
+		file_exists_result file_exists(const path &path) const;
+		is_file_writable_result is_file_writable(const path &path) const;
+		is_file_readable_result is_file_readable(const path &path) const;
+		get_file_size_result get_file_size(const path &path) const;
+		read_file_contents_result read_file_contents(const path &path, std::vector<std::byte> &data) const;
+		write_file_contents_result write_file_contents(const path &path, const std::vector<std::byte> &data);
 
 	private:
 		struct mount_data {

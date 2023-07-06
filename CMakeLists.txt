@@ -49,16 +49,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ---- Developer mode ----
 
-if(NOT VFS_DEVELOPER_MODE)
-  return()
-elseif(NOT PROJECT_IS_TOP_LEVEL)
-  message(
-      AUTHOR_WARNING
-      "Developer mode is intended for developers of vfs"
-  )
+if (VFS_DEVELOPER_MODE)
+  if (NOT PROJECT_IS_TOP_LEVEL)
+    message(
+        AUTHOR_WARNING
+        "Developer mode is intended for developers of vfs"
+    )
+  endif()
+  include(cmake/dev-mode.cmake)
 endif()
-
-include(cmake/dev-mode.cmake)
 
 
 # ---- VFS library ----
@@ -117,9 +116,11 @@ target_compile_features(vfs_vfs PUBLIC cxx_std_20)
 
 # ---- Tests ----
 
-if(VFS_ENABLE_TESTS)
+if (VFS_DEVELOPER_MODE)
   include(CTest)
-  add_subdirectory(test)
+  if (BUILD_TESTING)
+    add_subdirectory(test)
+  endif()
 endif()
 
 # ---- Install rules ----

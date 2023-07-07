@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vfs/vfs_export.hpp>
 
 #include <vfs/path_fwd.hpp>

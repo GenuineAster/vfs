@@ -8,6 +8,11 @@ namespace vfs {
 		m_data = nullptr;
 	}
 
+	path::path(const char *string) {
+		m_data = nullptr;
+		set(string);
+	}
+
 	path::~path() {
 		if (m_data != nullptr) {
 			delete[] m_data;

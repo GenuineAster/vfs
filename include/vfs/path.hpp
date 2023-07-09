@@ -14,6 +14,8 @@ namespace vfs {
 		static constexpr char s_separator[2] = "/";
 
 		path();
+		path(const char *string);
+
 		~path();
 
 		path(const path &path);
